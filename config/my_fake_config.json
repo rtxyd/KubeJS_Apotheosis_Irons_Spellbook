@@ -1,0 +1,68 @@
+{
+	"a_fake_config": true,
+	"reforging_logic": true,
+	"refresh_on_server_unloaded": false,
+	"cache": {
+		"recorded_irons_items": {
+			"minecraft:air": [],
+			"irons_spellbooks:necronomicon_spell_book": [],
+			"irons_spellbooks:druidic_spell_book": [
+				"nature"
+			],
+			"irons_spellbooks:cursed_doll_spell_book": [
+				"blood"
+			],
+			"irons_spellbooks:blaze_spell_book": [
+				"fire"
+			],
+			"irons_spellbooks:lightning_rod": [
+				"lightning"
+			],
+			"irons_spellbooks:graybeard_staff": [],
+			"irons_spellbooks:evoker_spell_book": [
+				"evocation"
+			],
+			"irons_spellbooks:ice_staff": [
+				"ice"
+			]
+		},
+		"magicAffixMap": {
+			"evocation": [
+				"your_namespace:magic_item/attribute/evocation/exevocationaffinity",
+				"your_namespace:magic_item/attribute/evocation/evocationaffinity"
+			],
+			"fire": [
+				"your_namespace:magic_item/attribute/fire/exfireaffinity",
+				"your_namespace:magic_item/attribute/fire/fireaffinity"
+			],
+			"blood": [
+				"your_namespace:magic_item/attribute/blood/exbloodaffinity",
+				"your_namespace:magic_item/attribute/blood/bloodaffinity"
+			],
+			"holy": [
+				"your_namespace:magic_item/attribute/holy/holyaffinity",
+				"your_namespace:magic_item/attribute/holy/exholyaffinity"
+			],
+			"ice": [
+				"your_namespace:magic_item/attribute/ice/exiceaffinity",
+				"your_namespace:magic_item/attribute/ice/iceaffinity"
+			],
+			"eldritch": [
+				"your_namespace:magic_item/attribute/eldritch/exeldritchaffinity",
+				"your_namespace:magic_item/attribute/eldritch/eldritchaffinity"
+			],
+			"lightning": [
+				"your_namespace:magic_item/attribute/lightning/exlightningaffinity",
+				"your_namespace:magic_item/attribute/lightning/lightningaffinity"
+			],
+			"nature": [
+				"your_namespace:magic_item/attribute/nature/exnatureaffinity",
+				"your_namespace:magic_item/attribute/nature/natureaffinity"
+			],
+			"ender": [
+				"your_namespace:magic_item/attribute/ender/enderaffinity",
+				"your_namespace:magic_item/attribute/ender/exenderaffinity"
+			]
+		}
+	}
+}

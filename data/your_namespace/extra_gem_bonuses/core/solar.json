@@ -1,0 +1,26 @@
+{
+    "type": "apotheosis:extra_gem_bonus",
+    "gem": "apotheosis:core/solar",
+    "bonuses": [
+        {
+            "type": "apotheosis:attribute",
+            "attribute": "irons_spellbooks:fire_spell_power",
+            "gem_class": {
+                "key": "magic_item",
+                "types": [
+                   "your_namespace:irons_magic_staff",
+                   "your_namespace:spellbook"
+                ]
+            },        
+            "operation": "add_multiplied_base", 
+            "values": {
+                "cracked": 0.20,
+                "chipped": 0.30,
+                "flawed": 0.40,
+                "normal": 0.50,
+                "flawless": 0.60,
+                "perfect": 0.70
+            }
+        }
+    ]
+} 

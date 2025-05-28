@@ -1,0 +1,24 @@
+{
+    "type": "apotheosis:extra_gem_bonus",
+    "gem": "apotheosis:overworld/earth",
+    "bonuses": [
+        {
+            "type": "apotheosis:enchantment",
+            "enchantment": "minecraft:unbreaking",
+            "gem_class": {
+                "key": "magic_item",
+                "types": [
+                   "your_namespace:irons_magic_staff",
+                   "your_namespace:spellbook"
+                ]
+            },        
+            "mode": "existing", 
+            "values": {
+                "flawed": 1, 
+                "normal": 2,
+                "flawless": 3,
+                "perfect": 4
+            }
+        }
+    ]
+}

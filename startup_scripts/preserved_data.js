@@ -1,0 +1,56 @@
+const defaultLocalization = global.defaultLocalization = 	{
+	"gem_class.magic_item": "Magic Item",
+    "loot_category.your_namespace.irons_magic_staff": "Magic Staff",
+    "loot_category.your_namespace.irons_magic_staff.plural": "MagicStaff",
+    "loot_category.your_namespace.spellbook": "Spellbook",
+    "loot_category.your_namespace.spellbook.plural": "Spellbook",
+    "affix.your_namespace:magic_item/attribute/spellpower": "Power",
+    "affix.your_namespace:magic_item/attribute/spellpower.suffix": "of Power",
+    "affix.your_namespace:magic_item/attribute/exspellpower": "ExPower",
+    "affix.your_namespace:magic_item/attribute/exspellpower.suffix": "of ExPower",
+	"affix.your_namespace:magic_item/attribute/evocation/exevocationaffinity": "ExevocationAffinity",
+	"affix.your_namespace:magic_item/attribute/evocation/exevocationaffinity.suffix": "of ExevocationAffinity",
+	"affix.your_namespace:magic_item/attribute/evocation/evocationaffinity": "EvocationAffinity",
+	"affix.your_namespace:magic_item/attribute/evocation/evocationaffinity.suffix": "of EvocationAffinity",
+	"affix.your_namespace:magic_item/attribute/fire/exfireaffinity": "ExfireAffinity",
+	"affix.your_namespace:magic_item/attribute/fire/exfireaffinity.suffix": "of ExfireAffinity",
+	"affix.your_namespace:magic_item/attribute/fire/fireaffinity": "FireAffinity",
+	"affix.your_namespace:magic_item/attribute/fire/fireaffinity.suffix": "of FireAffinity",
+	"affix.your_namespace:magic_item/attribute/blood/exbloodaffinity": "ExbloodAffinity",
+	"affix.your_namespace:magic_item/attribute/blood/exbloodaffinity.suffix": "of ExbloodAffinity",
+	"affix.your_namespace:magic_item/attribute/blood/bloodaffinity": "BloodAffinity",
+	"affix.your_namespace:magic_item/attribute/blood/bloodaffinity.suffix": "of BloodAffinity",
+	"affix.your_namespace:magic_item/attribute/holy/holyaffinity": "HolyAffinity",
+	"affix.your_namespace:magic_item/attribute/holy/holyaffinity.suffix": "of HolyAffinity",
+	"affix.your_namespace:magic_item/attribute/holy/exholyaffinity": "ExholyAffinity",
+	"affix.your_namespace:magic_item/attribute/holy/exholyaffinity.suffix": "of ExholyAffinity",
+	"affix.your_namespace:magic_item/attribute/ice/exiceaffinity": "ExiceAffinity",
+	"affix.your_namespace:magic_item/attribute/ice/exiceaffinity.suffix": "of ExiceAffinity",
+	"affix.your_namespace:magic_item/attribute/ice/iceaffinity": "IceAffinity",
+	"affix.your_namespace:magic_item/attribute/ice/iceaffinity.suffix": "of IceAffinity",
+	"affix.your_namespace:magic_item/attribute/eldritch/exeldritchaffinity": "ExeldritchAffinity",
+	"affix.your_namespace:magic_item/attribute/eldritch/exeldritchaffinity.suffix": "of ExeldritchAffinity",
+	"affix.your_namespace:magic_item/attribute/eldritch/eldritchaffinity": "EldritchAffinity",
+	"affix.your_namespace:magic_item/attribute/eldritch/eldritchaffinity.suffix": "of EldritchAffinity",
+	"affix.your_namespace:magic_item/attribute/lightning/exlightningaffinity": "ExlightningAffinity",
+	"affix.your_namespace:magic_item/attribute/lightning/exlightningaffinity.suffix": "of ExlightningAffinity",
+	"affix.your_namespace:magic_item/attribute/lightning/lightningaffinity": "LightningAffinity",
+	"affix.your_namespace:magic_item/attribute/lightning/lightningaffinity.suffix": "of LightningAffinity",
+	"affix.your_namespace:magic_item/attribute/nature/exnatureaffinity": "ExnatureAffinity",
+	"affix.your_namespace:magic_item/attribute/nature/exnatureaffinity.suffix": "of ExnatureAffinity",
+	"affix.your_namespace:magic_item/attribute/nature/natureaffinity": "NatureAffinity",
+	"affix.your_namespace:magic_item/attribute/nature/natureaffinity.suffix": "of NatureAffinity",
+	"affix.your_namespace:magic_item/attribute/ender/enderaffinity": "EnderAffinity",
+	"affix.your_namespace:magic_item/attribute/ender/enderaffinity.suffix": "of EnderAffinity",
+	"affix.your_namespace:magic_item/attribute/ender/exenderaffinity": "ExenderAffinity",
+	"affix.your_namespace:magic_item/attribute/ender/exenderaffinity.suffix": "of ExenderAffinity"
+}
+const defaultConfigObj = {
+    "a_fake_config": true,
+    "reforging_logic": true,
+    "cache": {
+        "recorded_irons_items": {
+            "minecraft:air": []
+        }
+    }
+}

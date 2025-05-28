@@ -1,0 +1,24 @@
+{
+    "type": "apotheosis:extra_gem_bonus",
+    "gem": "apotheosis:core/tyrannical",
+    "bonuses": [
+        {
+            "type": "apotheosis:attribute",
+            "attribute": "apotheosis:crit_chance",
+            "gem_class": {
+                "key": "magic_item",
+                "types": [
+                   "your_namespace:irons_magic_staff",
+                   "your_namespace:spellbook"
+                ]
+            },        
+            "operation": "add_value", 
+            "values": {
+                "flawed": 0.15,
+                "normal": 0.25,
+                "flawless": 0.35,
+                "perfect": 0.45
+            }
+        }
+    ]
+}

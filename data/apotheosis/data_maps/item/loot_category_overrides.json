@@ -1,0 +1,7 @@
+{
+	"values": {
+        "minecraft:iron_sword": "apotheosis:melee_weapon",
+        "minecraft:shulker_shell": "apotheosis:none",
+		"minecraft:brush": "your_namespace:irons_example_staff"
+	}
+}
