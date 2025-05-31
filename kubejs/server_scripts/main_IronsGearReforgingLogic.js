@@ -42,27 +42,27 @@ const main_IronsGearReforgingLogic = (function() {
         return Math.min(Math.max(value, min), max)
     }
     const ServerFunc = {}
-    ServerFunc.loadMagicAffixMapFromConfig = function() {
-        let magic_affix_map = configObj.cache.magicAffixMap
+    // ServerFunc.loadMagicAffixMapFromConfig = function() {
+    //     let magic_affix_map = configObj.cache.magicAffixMap
         
-        if (!magic_affix_map) return
-        for(const school_name in magic_affix_map) {
-            this_affix_obj = {
-                affixes: Utils.newList()
-            }
-            let this_affix_obj = magic_affix_map[school_name]
-            if (!this_affix_obj || !this_affix_obj.affixes) continue
-            for (const affixes in this_affix_obj.affixes) {
-                this_affix_obj.affixes.addAll(affixes)
-                console.log(this_affix_obj.affixes);
-            }
-            magicAffixMap.put(school_name, this_affix_obj)
-        }
-        ServerFunc.loadMagicAffixMapFromConfig = null
-    }
+    //     if (!magic_affix_map) return
+    //     for(const school_name in magic_affix_map) {
+    //         this_affix_obj = {
+    //             affixes: Utils.newList()
+    //         }
+    //         let this_affix_obj = magic_affix_map[school_name]
+    //         if (!this_affix_obj || !this_affix_obj.affixes) continue
+    //         for (const affixes in this_affix_obj.affixes) {
+    //             this_affix_obj.affixes.addAll(affixes)
+    //             console.log(this_affix_obj.affixes);
+    //         }
+    //         magicAffixMap.put(school_name, this_affix_obj)
+    //     }
+    //     ServerFunc.loadMagicAffixMapFromConfig = null
+    // }
     ServerEvents.loaded(e => {
         let affixesList = apotheosisClass.AffixRegistry.INSTANCE
-        ServerFunc.loadMagicAffixMapFromConfig()
+        // ServerFunc.loadMagicAffixMapFromConfig()
         affixesList.getKeys().forEach(key => {
             let value = affixesList.getValue(key)
             if (key.getNamespace().startsWith($KEY)) {
