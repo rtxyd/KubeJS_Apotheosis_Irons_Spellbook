@@ -1,0 +1,13 @@
+ClientEvents.lang('en_us', event => {
+  event.add('affix.irons_spellbooks:spellbook/attribute/spell_power', 'Power')
+  event.add('affix.irons_spellbooks:spellbook/attribute/spell_power.suffix', 'of Power')
+  event.add("gem_class.magic_item", "Magic Item")
+  event.add("text.apotheosis.category.irons_magic_staff", "Magic Staff")
+  event.add("text.apotheosis.category.irons_magic_staff.plural", "Magic Staff")
+  event.add("text.apotheosis.category.spellbook", "Spellbook")
+  event.add("text.apotheosis.category.spellbook.plural", "Spellbook")
+  event.add("text.apotheosis.category.ring", "Ring")
+  event.add("text.apotheosis.category.ring.plural", "Ring")
+  event.add("text.apotheosis.category.necklace", "Necklace")
+  event.add("text.apotheosis.category.necklace.plural", "Necklace")
+})
