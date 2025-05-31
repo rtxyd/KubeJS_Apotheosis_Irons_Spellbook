@@ -36,6 +36,8 @@
   },
   "types": [
     "irons_magic_staff",
-    "spellbook"
+    "spellbook",
+    "ring",
+    "necklace"
   ]
 }
