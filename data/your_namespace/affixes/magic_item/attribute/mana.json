@@ -1,7 +1,7 @@
 {
     "type": "apotheosis:attribute",
     "attribute": "irons_spellbooks:max_mana",
-    "categories": ["your_namespace:irons_magic_staff", "your_namespace:spellbook"],
+    "categories": ["your_namespace:irons_magic_staff", "your_namespace:spellbook", "ring", "necklace"],
     "definition": {
         "affix_type": "stat",
         "exclusive_set": [],
