@@ -6,6 +6,9 @@
 		"recorded_irons_items": {
 			"druidic_spell_book": [
 				"nature"
+			],
+			"ice_staff": [
+				"ice"
 			]
 		},
 		"magicAffixMap": {

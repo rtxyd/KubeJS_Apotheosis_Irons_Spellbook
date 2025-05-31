@@ -58,28 +58,28 @@ const main_IronsGearReforgingLogic = (function() {
             default: return item['getAttributeModifiers(net.minecraft.world.entity.EquipmentSlot,net.minecraft.world.item.ItemStack)'](equipmentSlot, itemStack_0).keys();
         }
     }
-    ServerFunc.loadMagicAffixMapFromConfig = function() {
-        let magic_affix_map = configObj.cache.magicAffixMap
+    // ServerFunc.loadMagicAffixMapFromConfig = function() {
+    //     let magic_affix_map = configObj.cache.magicAffixMap
         
-        if (!magic_affix_map) return
-        for(const affix_name in magic_affix_map) {
-            this_affix_obj = {
-                affixes: Utils.newList()
-            }
-            let this_affix_obj = magic_affix_map[affix_name]
-            if (!this_affix_obj || !this_affix_obj.affixes) continue
-            for (const affixes in this_affix_obj.affixes) {
-                this_affix_obj.affixes.addAll(affixes)
-                console.log(this_affix_obj.affixes);
-            }
-            magicAffixMap.put(affix_name, this_affix_obj)
-        }
-        ServerFunc.loadMagicAffixMapFromConfig = null
-    }
+    //     if (!magic_affix_map) return
+    //     for(const affix_name in magic_affix_map) {
+    //         this_affix_obj = {
+    //             affixes: Utils.newList()
+    //         }
+    //         let this_affix_obj = magic_affix_map[affix_name]
+    //         if (!this_affix_obj || !this_affix_obj.affixes) continue
+    //         for (const affixes in this_affix_obj.affixes) {
+    //             this_affix_obj.affixes.addAll(affixes)
+    //             console.log(this_affix_obj.affixes);
+    //         }
+    //         magicAffixMap.put(affix_name, this_affix_obj)
+    //     }
+    //     ServerFunc.loadMagicAffixMapFromConfig = null
+    // }
     ServerEvents.loaded(e => {
         let affixesList = AffixRegistry.INSTANCE
         global.fallback_affix = affixesList['holder(net.minecraft.resources.ResourceLocation)'](ResourceLocation.tryParse("irons_spellbooks:affixes/spellbook/attribute/spell_power"))
-        ServerFunc.loadMagicAffixMapFromConfig()
+        // ServerFunc.loadMagicAffixMapFromConfig()
         affixesList.getKeys().forEach(key => {
             let value = affixesList.getValue(key)
             if (key.getNamespace().startsWith($KEY)) {
