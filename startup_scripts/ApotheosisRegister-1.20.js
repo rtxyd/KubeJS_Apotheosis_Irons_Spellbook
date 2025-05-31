@@ -196,7 +196,7 @@ const Startup_main = (function() {
      */
     let tag_spellbook = global.tag_spellbook = StartupFunc.createItemTagKey("curios", "spellbook")
     let tag_ring = global.tag_ring = StartupFunc.createItemTagKey("curios", "ring")
-    let tag_necklace = global.tag_ring = StartupFunc.createItemTagKey("curios", "necklace")
+    let tag_necklace = global.tag_necklace = StartupFunc.createItemTagKey("curios", "necklace")
     StartupEvents.init(e => {
         ApotheosisRegister.registerLootCategory(null, 'spellbook', t => StartupFunc.isTagKey(t, tag_spellbook), [null])
         ApotheosisRegister.registerLootCategory(null, 'ring', t => StartupFunc.isTagKey(t, tag_ring), [null])
