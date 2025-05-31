@@ -9,15 +9,19 @@
                 "key": "magic_item",
                 "types": [
                    "your_namespace:irons_magic_staff",
-                   "your_namespace:spellbook"
+                   "your_namespace:spellbook",
+                   "your_namespace:ring",
+                   "your_namespace:necklace",
+                   "your_namespace:ring",
+                   "your_namespace:necklace"
                 ]
             },        
             "operation": "add_multiplied_total",
             "values": {
-                "flawed": 0.30,
-                "normal": 0.40,
-                "flawless": 0.50,
-                "perfect": 0.60
+                "flawed": 0.10,
+                "normal": 0.15,
+                "flawless": 0.20,
+                "perfect": 0.30
             }
         }
     ]

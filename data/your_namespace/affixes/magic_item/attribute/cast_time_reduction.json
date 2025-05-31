@@ -1,10 +1,7 @@
 {
     "type": "apotheosis:attribute",
-    "attribute": "irons_spellbooks:ice_spell_power",
-    "categories": [
-        "your_namespace:irons_magic_staff",
-        "your_namespace:spellbook"
-    ],
+    "attribute": "irons_spellbooks:cast_time_reduction",
+    "categories": ["your_namespace:irons_magic_staff", "your_namespace:spellbook"],
     "definition": {
         "affix_type": "stat",
         "exclusive_set": [],
@@ -13,27 +10,27 @@
             "weight": 5
         }
     },
-    "operation": "add_multiplied_total",
+    "operation": "add_multiplied_base",
     "values": {
         "apotheosis:common": {
             "min": 0.05,
-            "max": 0.10
+            "max": 0.05
         },
         "apotheosis:uncommon": {
-            "min": 0.10,
-            "max": 0.15
+            "min": 0.1,
+            "max": 0.1
         },
         "apotheosis:rare": {
             "min": 0.15,
-            "max": 0.20
+            "max": 0.15
         },
         "apotheosis:epic": {
-            "min": 0.20,
-            "max": 0.25
+            "min": 0.2,
+            "max": 0.2
         },
         "apotheosis:mythic": {
             "min": 0.25,
-            "max": 0.30
+            "max": 0.25
         }
     }
 }

@@ -4,12 +4,14 @@
     "bonuses": [
         {
             "type": "apotheosis:attribute",
-            "attribute": "irons_spellbooks:casting_movespeed",
+            "attribute": "irons_spellbooks:cast_time_reduction",
             "gem_class": {
                 "key": "magic_item",
                 "types": [
                    "your_namespace:irons_magic_staff",
-                   "your_namespace:spellbook"
+                   "your_namespace:spellbook",
+                   "your_namespace:ring",
+                   "your_namespace:necklace"
                 ]
             },        
             "operation": "add_multiplied_base", 

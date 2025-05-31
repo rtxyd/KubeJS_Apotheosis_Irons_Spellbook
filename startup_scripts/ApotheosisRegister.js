@@ -21,7 +21,7 @@ const ApotheosisRegister = (function() {
             ALObjects$EquipmentSlotGroups: Java.loadClass('dev.shadowsoffire.apothic_attributes.api.ALObjects$EquipmentSlotGroups'),
             Components: Java.loadClass('dev.shadowsoffire.apotheosis.Apoth$Components'),
             ItemAffixes: Java.loadClass('dev.shadowsoffire.apotheosis.affix.ItemAffixes'),
-
+            AffixInstance: Java.loadClass('dev.shadowsoffire.apotheosis.affix.AffixInstance'),
             GenContext: Java.loadClass('dev.shadowsoffire.apotheosis.tiers.GenContext'),
             WorldTier: Java.loadClass('dev.shadowsoffire.apotheosis.tiers.WorldTier'),
             AffixHelper: Java.loadClass('dev.shadowsoffire.apotheosis.affix.AffixHelper'),
@@ -39,6 +39,7 @@ const ApotheosisRegister = (function() {
     let neededClass
     try {
         neededClass = global.neededClass = {
+            Random: Java.loadClass('java.util.Random'),
             Style: Java.loadClass('net.minecraft.network.chat.Style'),
             Component: Java.loadClass('net.minecraft.network.chat.Component'),
             TagKey: Java.loadClass('net.minecraft.tags.TagKey'),

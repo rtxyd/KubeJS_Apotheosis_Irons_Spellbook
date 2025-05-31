@@ -19,7 +19,6 @@ if (Object.keys(ApotheosisRegister) !== 0) {
 }
 StartupEvents.postInit(event => {
     StartupFunc.loadOrInitConfigObj()
-    StartupFunc.loadOrInitLocalization()
 })
 const StartupFunc = {}
 
@@ -52,16 +51,4 @@ StartupFunc.loadOrInitConfigObj = function() {
     }
     console.log(`a_fake_config: ${a_fake_config}, recorded_irons_items:${recorded_irons_items}`);
     StartupFunc.loadOrInitConfigObj = null
-}
-StartupFunc.loadOrInitLocalization = function() {
-    let fake_localization = global.fake_localization = JsonIO.toObject(JsonIO.readJson(localizationPath))
-    if(!fake_localization) {
-        let localization = global.defaultLocalization
-    }
-    if (!fake_localization["gem_class.magic_item"]) {
-        global.fake_localization["gem_class.magic_item"] = "Magic Item"
-    }
-    JsonIO.write(localizationPath, global.fake_localization)
-    console.log(`localization loaded`);
-    StartupFunc.loadOrInitLocalization = null
 }

@@ -15,6 +15,7 @@ const main_IronsGearReforgingLogic = (function() {
     let CurioBaseItem = ironsClass.CurioBaseItem
     let Components = apotheosisClass.Components
     let ItemAffixes = apotheosisClass.ItemAffixes
+    let AffixInstance = apotheosisClass.AffixInstance
     let Affix = apotheosisClass.Affix
     let WorldTier = apotheosisClass.WorldTier
     let LootController = apotheosisClass.LootController
@@ -23,6 +24,7 @@ const main_IronsGearReforgingLogic = (function() {
     let ResourceLocation = neededClass.ResourceLocation
     let DataComponents = neededClass.DataComponents
     let ItemStack = neededClass.ItemStack
+    let Random = neededClass.Random
     let Style = neededClass.Style
     let Component = neededClass.Component
     let ItemAttributeModifiers = neededClass.ItemAttributeModifiers
@@ -32,6 +34,7 @@ const main_IronsGearReforgingLogic = (function() {
     let CuriosRegistry = curiosClass.CuriosRegistry
     let CurioAttributeModifiers = curiosClass.CurioAttributeModifiers
     let finalArray
+    // let jRandom = new Random()
     const recorded_irons_items = global.recorded_irons_items
     const magicAffixMap = Utils.newMap()
     const reforgingMenuMap = Utils.newMap()
@@ -166,6 +169,8 @@ const main_IronsGearReforgingLogic = (function() {
                             let affixes = itemStack.getOrDefault(Components.AFFIXES, ItemAffixes.EMPTY)
                             let builder = affixes.toBuilder()
                             let removed_affixes = []
+                            let nameList = Utils.newList()
+                            let flag_fallback = true
                             builder.removeIf(affix_holder => {
                                 let id = affix_holder.getId()
                                 let namesace = id.getNamespace()
@@ -179,26 +184,11 @@ const main_IronsGearReforgingLogic = (function() {
                                     for (const name of item_school_names) {
                                         if (name != this_school_name) {
                                             removed_affixes.push(affix_holder)
-                                            // change the name
-                                            let component = AffixHelper.getName(itemStack)
-                                            let contents = component.getContents()
-                                            let args = contents.getArgs()
-                                            let index = contents.getKey().endsWith("four") ? 2 : 1
-                                            let prefix = args[index - 1]
-                                            let suffix = args[index + 1]
-                                            console.log(prefix.toString().toLowerCase(), suffix, name);
-                                            if (prefix.toString().contains(this_school_name)) {
-                                                component = Component.translatable(contents.getKey(), args[index - 1], "", args[index + 1] !== "" ? Component.translatable("affix.your_namespace:fallback_name.suffix") : "")['withStyle(net.minecraft.network.chat.Style)'](Style.EMPTY['withColor(net.minecraft.network.chat.TextColor)'](AffixHelper.getRarity(itemStack).get().color()).withItalic(false))
-                                            }
-                                            if (suffix.toString().contains(this_school_name)) {
-                                                component = Component.translatable(contents.getKey(), Component.translatable("affix.your_namespace:fallback_name"), "", args[index + 1])['withStyle(net.minecraft.network.chat.Style)'](Style.EMPTY['withColor(net.minecraft.network.chat.TextColor)'](AffixHelper.getRarity(itemStack).get().color()).withItalic(false))
-                                            }
-                                            AffixHelper.setName(itemStack, component)
-                                            // console.log(`已移除：${affix_holder}, 学派：${this_school_name}`)
                                             return true
                                         }
                                     }
                                 }
+                                nameList.add(affix_holder.get())
                                 return false
                             })
                             // console.log(removed_affixes);
@@ -208,6 +198,7 @@ const main_IronsGearReforgingLogic = (function() {
                             // apotheosis choosing mechanic
                             removed_affixes.forEach(removed_affix => {
                                 let level = Math.clamp(affixes.getLevel(removed_affix), 0, Affix.MAX_LEVEL)
+                                let rarity = AffixHelper.getRarity(itemStack)
                                 item_school_names.forEach(name => {
                                     let affix_obj = magicAffixMap.get(name)
                                     let available = affix_obj.affixes.stream().map(a => a.wrap(WorldTier.getTier(player), player.getLuck())).toList()
@@ -217,12 +208,31 @@ const main_IronsGearReforgingLogic = (function() {
                                         return
                                     }
                                     let selected = WeightedRandom.getRandomItem(player.getRandom(), available, weight).get().data()
+                                    let selected_holder = AffixRegistry.INSTANCE['holder(dev.shadowsoffire.placebo.codec.CodecProvider)'](selected)
+                                    if (!nameList.contains(selected)) {
+                                        nameList.add(selected)
+                                    }
                                     // console.log(selected);
-                                    builder.put(AffixRegistry.INSTANCE['holder(dev.shadowsoffire.placebo.codec.CodecProvider)'](selected), level)
+                                    builder.put(selected_holder, level)
                                 })
                             })
                             // end
                             AffixHelper.setAffixes(itemStack, builder.build())
+                            // jRandom.setSeed(player.getRandom().nextLong())
+                            // change the name
+                            if (nameList.size() == 0 && flag_fallback) {
+                                console.log(`namelist is 0, fallback`)
+                                let fallback_affix = affixesList['holder(net.minecraft.resources.ResourceLocation)'](ResourceLocation.tryParse("your_namespace:magic_item/attribute/spellpower"))
+                                nameList.add(fallback_affix.get())
+                                flag_fallback = false
+                            }
+                            // Collections.shuffle(nameList, jRandom)
+                            let component = AffixHelper.getName(itemStack)
+                            let contents = component.getContents()
+                            let name_key = contents.getKey()
+
+                            component = Component.translatable(name_key, nameList.get(0).getName(true), "", nameList.size() > 1 ? nameList.get(1).getName(false) : "").setStyle(component.getStyle())
+                            AffixHelper.setName(itemStack, component)
                         })
                     } else {
                         return
@@ -252,35 +262,35 @@ const main_IronsGearReforgingLogic = (function() {
         return name_extracted
     }
     ServerFunc.updateConfigAndFakeLocalization = function() {
-        let config_cache = configObj.cache
-        let cache_items = config_cache.recorded_irons_items = {}
-        let cache_affixes = config_cache.magicAffixMap = {}
-        let fake_localization = global.fake_localization
-        for (const key of recorded_irons_items.keySet()) {
-            cache_items[key] = recorded_irons_items.get(key)
-        }
-        let flag = true
-        for (const key of magicAffixMap.keySet()) {
-            let this_school_affixes = cache_affixes[key] = []
-            for (const affix of magicAffixMap.get(key).affixes)
-            {
-                let affix_locstr = AffixRegistry.INSTANCE.getKey(affix).toString()
-                this_school_affixes.push(affix_locstr)
-                let prefix_key = `affix.${affix_locstr}`
-                let suffix_key = `affix.${affix_locstr}.suffix`
-                let preffix_value = fake_localization[prefix_key]
-                if (!preffix_value) {
-                    fake_localization[prefix_key] = ServerFunc.randomizeAffixName(affix_locstr)
-                }
-                let suffix_value = fake_localization[suffix_key]
-                if (!suffix_value) {
-                    fake_localization[suffix_key] = "of " + ServerFunc.randomizeAffixName(affix_locstr)
-                }
-            }
-        }
-        console.log(config_cache);
-        JsonIO.write(global.localizationPath, global.fake_localization)
-        JsonIO.write(global.configFilePath, configObj)
+        // let config_cache = configObj.cache
+        // let cache_items = config_cache.recorded_irons_items = {}
+        // let cache_affixes = config_cache.magicAffixMap = {}
+        // let fake_localization = global.fake_localization
+        // for (const key of recorded_irons_items.keySet()) {
+        //     cache_items[key] = recorded_irons_items.get(key)
+        // }
+        // let flag = true
+        // for (const key of magicAffixMap.keySet()) {
+        //     let this_school_affixes = cache_affixes[key] = []
+        //     for (const affix of magicAffixMap.get(key).affixes)
+        //     {
+        //         let affix_locstr = AffixRegistry.INSTANCE.getKey(affix).toString()
+        //         this_school_affixes.push(affix_locstr)
+        //         let prefix_key = `affix.${affix_locstr}`
+        //         let suffix_key = `affix.${affix_locstr}.suffix`
+        //         let preffix_value = fake_localization[prefix_key]
+        //         if (!preffix_value) {
+        //             fake_localization[prefix_key] = ServerFunc.randomizeAffixName(affix_locstr)
+        //         }
+        //         let suffix_value = fake_localization[suffix_key]
+        //         if (!suffix_value) {
+        //             fake_localization[suffix_key] = "of " + ServerFunc.randomizeAffixName(affix_locstr)
+        //         }
+        //     }
+        // }
+        // console.log(config_cache);
+        // JsonIO.write(global.localizationPath, global.fake_localization)
+        // JsonIO.write(global.configFilePath, configObj)
     }
     ServerFunc.updateConfig = function() {
         let config_cache = configObj.cache
@@ -302,10 +312,11 @@ const main_IronsGearReforgingLogic = (function() {
         JsonIO.write(global.configFilePath, configObj)
     }
     ServerEvents.unloaded(e => {
-        if (configObj["refresh_localization_on_server_unloaded"]) {
-            ServerFunc.updateConfigAndFakeLocalization()
-        } else {
+        if (configObj["refresh_on_server_unloaded"]) {
             ServerFunc.updateConfig()
+        }
+        if (configObj["update_localization"]) {
+            // ServerFunc.updateConfigAndFakeLocalization()
         }
         console.log('unloaded server')
     })

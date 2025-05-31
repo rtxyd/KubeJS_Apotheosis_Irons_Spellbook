@@ -4,16 +4,20 @@
     "bonuses": [
         {
             "type": "apotheosis:attribute",
-            "attribute": "apotheosis:crit_chance",
+            "attribute": "irons_spellbooks:summon_damage",
             "gem_class": {
                 "key": "magic_item",
                 "types": [
                    "your_namespace:irons_magic_staff",
-                   "your_namespace:spellbook"
+                   "your_namespace:spellbook",
+                   "your_namespace:ring",
+                   "your_namespace:necklace"
                 ]
             },        
-            "operation": "add_value", 
+            "operation": "add_multiplied_total", 
             "values": {
+                "cracked": 0.05,
+                "chipped": 0.10,
                 "flawed": 0.15,
                 "normal": 0.25,
                 "flawless": 0.35,

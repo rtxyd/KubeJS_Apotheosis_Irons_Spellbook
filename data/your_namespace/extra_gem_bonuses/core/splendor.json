@@ -9,32 +9,34 @@
                 "key": "magic_item",
                 "types": [
                    "your_namespace:irons_magic_staff",
-                   "your_namespace:spellbook"
+                   "your_namespace:spellbook",
+                   "your_namespace:ring",
+                   "your_namespace:necklace"
                 ]
             },        
             "modifiers": [
                 {
-                    "attribute": "apothic_attributes:experience_gained",
+                    "attribute": "irons_spellbooks:cooldown_reduction",
                     "operation": "add_multiplied_base",
                     "values": { 
-                        "cracked": 0.05, 
-                        "chipped": 0.10,
-                        "flawed": 0.15,
-                        "normal": 0.20,
-                        "flawless": 0.30,
-                        "perfect": 0.40
+                        "cracked": 0.01, 
+                        "chipped": 0.03,
+                        "flawed": 0.05,
+                        "normal": 0.07,
+                        "flawless": 0.10,
+                        "perfect": 0.15
                     }
                 },
                 {
-                    "attribute": "minecraft:generic.luck",
+                    "attribute": "irons_spellbooks:max_mana",
                     "operation": "add_value",
                     "values": { 
-                        "cracked": 0.25,
-                        "chipped": 0.5,
-                        "flawed": 0.75,
-                        "normal": 1.0,
-                        "flawless": 1.5,
-                        "perfect": 2.0
+                        "cracked": 5,
+                        "chipped": 15,
+                        "flawed": 25,
+                        "normal": 35,
+                        "flawless": 45,
+                        "perfect": 60
                     }
                 }
             ]
