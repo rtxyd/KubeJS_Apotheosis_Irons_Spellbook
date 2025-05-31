@@ -5,6 +5,7 @@ const main_IronsGearReforgingLogic = (function() {
     let $KEY = global.$KEY = 'irons_spellbooks'
     let neededClass = global.neededClass
     let tag_spellbook = global.tag_spellbook
+    let StartupFunc = global.StartupFunc
     let apotheosisClass = global.apotheosisClass
     let ironsClass = global.ironsClass
     let curiosClass = global.curiosClass
@@ -42,7 +43,6 @@ const main_IronsGearReforgingLogic = (function() {
     let CuriosApi = curiosClass.CuriosApi
     let CuriosHelper = CuriosApi.getCuriosHelper()
     let CurioAttributeModifiers = curiosClass.CurioAttributeModifiers
-    let StartupFunc = global.StartupFunc
     let jRandom = new Random()
     let finalArray
     const recorded_irons_items = global.recorded_irons_items = Utils.newMap()
@@ -62,33 +62,30 @@ const main_IronsGearReforgingLogic = (function() {
         let magic_affix_map = configObj.cache.magicAffixMap
         
         if (!magic_affix_map) return
-        for(const school_name in magic_affix_map) {
+        for(const affix_name in magic_affix_map) {
             this_affix_obj = {
                 affixes: Utils.newList()
             }
-            let this_affix_obj = magic_affix_map[school_name]
+            let this_affix_obj = magic_affix_map[affix_name]
             if (!this_affix_obj || !this_affix_obj.affixes) continue
             for (const affixes in this_affix_obj.affixes) {
                 this_affix_obj.affixes.addAll(affixes)
                 console.log(this_affix_obj.affixes);
             }
-            magicAffixMap.put(school_name, this_affix_obj)
+            magicAffixMap.put(affix_name, this_affix_obj)
         }
         ServerFunc.loadMagicAffixMapFromConfig = null
     }
     ServerEvents.loaded(e => {
         let affixesList = AffixRegistry.INSTANCE
-        // ServerFunc.loadMagicAffixMapFromConfig()
+        global.fallback_affix = affixesList['holder(net.minecraft.resources.ResourceLocation)'](ResourceLocation.tryParse("irons_spellbooks:affixes/spellbook/attribute/spell_power"))
+        ServerFunc.loadMagicAffixMapFromConfig()
         affixesList.getKeys().forEach(key => {
             let value = affixesList.getValue(key)
             if (key.getNamespace().startsWith($KEY)) {
                 let path_split = key.getPath().split("/")
                 // if (path_split.length <= 3) return
                 let this_affix_name = path_split[path_split.length - 1].replace("_spell_power", "")
-                if (this_affix_name === "spell_power") {
-                    global.fallback_affix = affixesList['holder(net.minecraft.resources.ResourceLocation)'](key)
-                }
-                
                 let this_affix_obj = magicAffixMap.get(this_affix_name)
                 if (!this_affix_obj) {
                     this_affix_obj = {
@@ -108,25 +105,22 @@ const main_IronsGearReforgingLogic = (function() {
     if (configObj["reforging_logic"]) {
         PlayerEvents.inventoryOpened(e => {
             let container = e.getInventoryContainer()
-            console.log(`open`);
             if (container instanceof ReforgingMenu && !menuMap.get(container)) {
-                console.log(`enter`);
-                
+                let cached_itemstack = null
                 let schedule = e.server.scheduleRepeatingInTicks(5, callback => {
-                    console.log(`repeating`);
-                    
                     if (container) {
                         // part 1
-                        console.log(`real enter`);
-                        
                         let itemStack_0 = container.getSlot(0).getItem()
                         if (itemStack_0.isEmpty()) return
                         let isSpellbook = StartupFunc.isTagKey(itemStack_0, tag_spellbook)
                         if (itemStack_0.getItem() instanceof CastingItem || isSpellbook) {
-                            console.log(`real enter 2`);
-                            
                             let itemStack_3 = container.getSlot(3).getItem()
                             if (itemStack_3.isEmpty()) return
+                            if (!cached_itemstack || !ItemStack.matches(cached_itemstack, itemStack_3)) {
+                                cached_itemstack = itemStack_3
+                            } else {
+                                return
+                            }
                             let itemStack_4 = container.getSlot(4).getItem()
                             let itemStack_5 = container.getSlot(5).getItem()
                             let item_stacks = [
@@ -134,16 +128,11 @@ const main_IronsGearReforgingLogic = (function() {
                                 itemStack_4,
                                 itemStack_5
                             ]
-                            console.log(item_stacks);
-                            
                             let item = itemStack_0.getItem()
-                            // if (item.equals(Items.AIR)) return
                             let item_school_names = recorded_irons_items.get(item)
 
                             // part 2
                             if (!item_school_names || !item_school_names[0]) {
-                                console.log(`check modifiers`);
-                                
                                 item_school_names = new Set()
                                 let player = e.player
                                 let modifiers
@@ -154,14 +143,8 @@ const main_IronsGearReforgingLogic = (function() {
                                     modifiers = item.getAttributeModifiers(EquipmentSlot.MAINHAND, itemStack_0).keys()
                                 }
                                 if (modifiers.isEmpty()) return
-                                // console.log(modifiers);
-                                
                                 modifiers.forEach(modifier => {
-                                    console.log(`modifier: ${modifier}`);
-
                                     let attribute = modifier
-                                    console.log(`attribute: ${attribute}`);
-                                    
                                     let attrId = BuiltInRegistries.ATTRIBUTE.getKey(attribute);
                                     let path = attrId.getPath()
                                     if (attrId && path.endsWith("spell_power")) {
@@ -183,35 +166,29 @@ const main_IronsGearReforgingLogic = (function() {
                                 recorded_irons_items.put(item, item_school_names)
                             }
                             else if (item_school_names.length == 0) return
-                            console.log(item_school_names);
+                            // console.log(item_school_names);
                             
                             //part 3
                             item_stacks.forEach(itemStack => {
                                 let affixes = Utils.newMap()
                                 let removed_affixes = []
-                                let nameList = Utils.newList()
                                 let flag_fallback = true
                                 affixes.putAll(AffixHelper.getAffixes(itemStack))
                                 affixes.keySet().forEach(affix_holder => {
                                     let id = affix_holder.getId()
-                                    console.log(id);
-                                    
                                     let path = id.getPath()
                                     if (path.endsWith('_spell_power')) {
                                         let path_split = id.getPath().split("/")
-                                        console.log(path_split);
-
+                                        // console.log(path_split);
                                         // if (path_split.length <= 3) return false
                                         let this_affix_name = path_split[2]
                                         for (const name of item_school_names) {
                                             if (name + "_spell_power" != this_affix_name) {
                                                 removed_affixes.push(affix_holder)
                                                 return
-                                                console.log(`已移除：${affix_holder}, 学派：${this_affix_name}`)
                                             }
                                         }
                                     }
-                                    nameList.add(affixes.get(affix_holder))
                                 })
                                 console.log(removed_affixes);
                                 
@@ -232,20 +209,6 @@ const main_IronsGearReforgingLogic = (function() {
                                         }
                                         jRandom.setSeed(e.player.getRandom().nextLong())
                                         Collections.shuffle(available, jRandom)
-                                        // change the name
-                                        if (nameList.size() == 0 && flag_fallback) {
-                                            console.log(`namelist is 0, fallback`)
-                                            let inst = new AffixInstance(global.fallback_affix, itemStack, rarity, level)
-                                            nameList.add(inst)
-                                            flag_fallback = false
-                                        }
-                                        Collections.shuffle(nameList, jRandom)
-                                        let component = AffixHelper.getName(itemStack)
-                                        let contents = component.getContents()
-                                        let name_key = contents.getKey()
-
-                                        component = Component.translatable(name_key, nameList.get(0).getName(true), "", nameList.size() > 1 ? nameList.get(1).getName(false) : "").setStyle(component.getStyle())
-                                        AffixHelper.setName(itemStack, component)
                                         let selected = available.get(0)
                                         let inst = new AffixInstance(AffixRegistry.INSTANCE['holder(dev.shadowsoffire.placebo.codec.CodecProvider)'](selected), itemStack, rarity, level)
                                         // console.log(selected);
@@ -253,7 +216,21 @@ const main_IronsGearReforgingLogic = (function() {
                                     })
                                 })
                                 // end
+                                // change the name
+                                if (affixes.size() == 0 && flag_fallback) {
+                                    console.log(`namelist is 0, fallback`)
+                                    let inst = new AffixInstance(global.fallback_affix, itemStack, rarity, level)
+                                    affixes.put(inst.affix(), inst)
+                                    flag_fallback = false
+                                }
+                                let nameList = affixes.keySet().iterator()
+                                let component = AffixHelper.getName(itemStack)
+                                let contents = component.getContents()
+                                let name_key = contents.getKey()
+
+                                component = Component.translatable(name_key, nameList.next().get().getName(true), "", affixes.size() > 1 ? nameList.next().get().getName(false) : "").setStyle(component.getStyle())
                                 AffixHelper.setAffixes(itemStack, affixes)
+                                AffixHelper.setName(itemStack, component)
                             })
                         } else if (CuriosHelper.isStackCurio(itemStack_0)){
                             recorded_irons_items.put(itemStack_0.getItem(), [])
