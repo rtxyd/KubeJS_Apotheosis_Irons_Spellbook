@@ -1,7 +1,7 @@
 {
 	"a_fake_config": true,
 	"reforging_logic": true,
-	"refresh_on_server_unloaded": false,
+	"refresh_on_server_unloaded": true,
 	"update_localization": false,
 	"cache": {
 		"recorded_irons_items": {
@@ -25,44 +25,47 @@
 			],
 			"irons_spellbooks:ice_staff": [
 				"ice"
+			],
+			"irons_spellbooks:pyrium_staff": [
+				"fire"
 			]
 		},
 		"magicAffixMap": {
-			"evocation": [
-				"your_namespace:magic_item/attribute/evocation/exevocationaffinity",
-				"your_namespace:magic_item/attribute/evocation/evocationaffinity"
+			"ice": [
+				"your_namespace:magic_item/attribute/ice/ice_spell_power",
+				"your_namespace:magic_item/attribute/ice/ex_ice_spell_power"
 			],
 			"fire": [
-				"your_namespace:magic_item/attribute/fire/exfireaffinity",
-				"your_namespace:magic_item/attribute/fire/fireaffinity"
+				"your_namespace:magic_item/attribute/fire/ex_fire_spell_power",
+				"your_namespace:magic_item/attribute/fire/fire_spell_power"
 			],
 			"blood": [
-				"your_namespace:magic_item/attribute/blood/exbloodaffinity",
-				"your_namespace:magic_item/attribute/blood/bloodaffinity"
-			],
-			"holy": [
-				"your_namespace:magic_item/attribute/holy/holyaffinity",
-				"your_namespace:magic_item/attribute/holy/exholyaffinity"
-			],
-			"ice": [
-				"your_namespace:magic_item/attribute/ice/exiceaffinity",
-				"your_namespace:magic_item/attribute/ice/iceaffinity"
-			],
-			"eldritch": [
-				"your_namespace:magic_item/attribute/eldritch/exeldritchaffinity",
-				"your_namespace:magic_item/attribute/eldritch/eldritchaffinity"
-			],
-			"lightning": [
-				"your_namespace:magic_item/attribute/lightning/exlightningaffinity",
-				"your_namespace:magic_item/attribute/lightning/lightningaffinity"
+				"your_namespace:magic_item/attribute/blood/blood_spell_power",
+				"your_namespace:magic_item/attribute/blood/ex_blood_spell_power"
 			],
 			"nature": [
-				"your_namespace:magic_item/attribute/nature/exnatureaffinity",
-				"your_namespace:magic_item/attribute/nature/natureaffinity"
+				"your_namespace:magic_item/attribute/nature/nature_spell_power",
+				"your_namespace:magic_item/attribute/nature/ex_nature_spell_power"
 			],
 			"ender": [
-				"your_namespace:magic_item/attribute/ender/enderaffinity",
-				"your_namespace:magic_item/attribute/ender/exenderaffinity"
+				"your_namespace:magic_item/attribute/ender/ex_ender_spell_power",
+				"your_namespace:magic_item/attribute/ender/ender_spell_power"
+			],
+			"evocation": [
+				"your_namespace:magic_item/attribute/evocation/ex_evocation_spell_power",
+				"your_namespace:magic_item/attribute/evocation/evocation_spell_power"
+			],
+			"holy": [
+				"your_namespace:magic_item/attribute/holy/ex_holy_spell_power",
+				"your_namespace:magic_item/attribute/holy/holy_spell_power"
+			],
+			"eldritch": [
+				"your_namespace:magic_item/attribute/eldritch/eldritch_spell_power",
+				"your_namespace:magic_item/attribute/eldritch/ex_eldritch_spell_power"
+			],
+			"lightning": [
+				"your_namespace:magic_item/attribute/lightning/ex_lightning_spell_power",
+				"your_namespace:magic_item/attribute/lightning/lightning_spell_power"
 			]
 		}
 	}

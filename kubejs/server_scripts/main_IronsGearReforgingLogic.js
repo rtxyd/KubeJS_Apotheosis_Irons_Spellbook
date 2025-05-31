@@ -98,8 +98,8 @@ const main_IronsGearReforgingLogic = (function() {
                     if (itemStack_0.getItem() instanceof CastingItem || isSpellbook) {
                         let itemStack_3 = container.getSlot(3).getItem()
                         if (itemStack_3.isEmpty()) return
-                        if (!cached_itemstack || !ItemStack.matches(cached_item_stack, itemStack_3)) {
-                            cached_itemstack = itemStack_3
+                        if (!cached_item_stack || !ItemStack.matches(cached_item_stack, itemStack_3)) {
+                            cached_item_stack = itemStack_3
                         } else {
                             return
                         }
