@@ -88,15 +88,21 @@ const main_IronsGearReforgingLogic = (function() {
     PlayerEvents.inventoryOpened(e => {
         let container = e.getInventoryContainer()
         if (container instanceof ReforgingMenu && !reforgingMenuMap.get(container)) {
+            let cached_item_stack = null
             let schedule = e.server.scheduleRepeatingInTicks(5, callback => {
                 if (container) {
                     // part 1
                     let itemStack_0 = container.getSlot(0).getItem()
-                    if (itemStack_0 === ItemStack.EMPTY) return
+                    if (itemStack_0.isEmpty()) return
                     let isSpellbook = itemStack_0['is(net.minecraft.tags.TagKey)'](tag_spellbook)
                     if (itemStack_0.getItem() instanceof CastingItem || isSpellbook) {
                         let itemStack_3 = container.getSlot(3).getItem()
-                        if (itemStack_3 === ItemStack.EMPTY) return
+                        if (itemStack_3.isEmpty()) return
+                        if (!cached_itemstack || !ItemStack.matches(cached_item_stack, itemStack_3)) {
+                            cached_itemstack = itemStack_3
+                        } else {
+                            return
+                        }
                         let itemStack_4 = container.getSlot(4).getItem()
                         let itemStack_5 = container.getSlot(5).getItem()
                         let item_stacks = [
@@ -105,7 +111,6 @@ const main_IronsGearReforgingLogic = (function() {
                             itemStack_5
                         ]
                         let item = itemStack_0.getItem()
-                        if (item.toString() === 'minecraft:air') return
                         let item_school_names = recorded_irons_items.get(item)
 
                         // part 2
