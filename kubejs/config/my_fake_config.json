@@ -1,4 +1,5 @@
 {
+	"version": "1.211.0",
 	"a_fake_config": true,
 	"reforging_logic": true,
 	"refresh_on_server_unloaded": true,
