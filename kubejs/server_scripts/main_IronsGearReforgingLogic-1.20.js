@@ -204,7 +204,7 @@ const main_IronsGearReforgingLogic = (function() {
                                         let affix_obj = magicAffixMap.get(name)
                                         let available = affix_obj.affixes
                                         if (available.size() == 0) {
-                                            console.error("Failed to replace affix (no affixes available)")
+                                            console.error(`Failed to replace affix (no affixes available), school: ${name}, affix: ${removed_affix}`)
                                             return
                                         }
                                         jRandom.setSeed(e.player.getRandom().nextLong())

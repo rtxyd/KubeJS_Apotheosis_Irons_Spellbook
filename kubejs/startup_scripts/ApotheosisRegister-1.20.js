@@ -3,12 +3,15 @@ const ApotheosisRegister = (function() {
     const $KEY = global.$KEY = "your_namespace"
     const configFilePath = global.configFilePath = "kubejs/config/my_fake_config.json"
     const defaultConfigObj = {
+        "version": "1.201.0",
         "a_fake_config": true,
         "reforging_logic": true,
         "refresh_on_server_unloaded": false,
         "cache": {
             "recorded_irons_items": {
-                "minecraft:air": []
+                "druidic_spell_book": [
+                    "nature"
+                ]
             }
         }
     }
@@ -154,7 +157,7 @@ const Startup_main = (function() {
         let a_fake_config = global.a_fake_config = configObj.get("a_fake_config")
         let recorded_irons_objs = configObj.cache.recorded_irons_items
         let recorded_irons_items = global.recorded_irons_items = Utils.newMap()
-        recorded_irons_items.put(ResourceLocation.tryParse('minecraft:air'), [])
+        // recorded_irons_items.put(ResourceLocation.tryParse('minecraft:air'), [])
         for (const key in recorded_irons_objs) {
             if (key === "minecraft:air") continue
             let item = BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(key))
