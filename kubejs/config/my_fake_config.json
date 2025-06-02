@@ -2,7 +2,7 @@
 	"version": "1.201.0",
 	"a_fake_config": true,
 	"reforging_logic": true,
-	"refresh_on_server_unloaded": true,
+	"refresh_on_server_unloaded": false,
 	"cache": {
 		"recorded_irons_items": {
 			"druidic_spell_book": [
