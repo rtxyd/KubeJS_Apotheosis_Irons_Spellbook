@@ -8,3 +8,4 @@ Download and put all things in `kubejs` folder into the folder named `kubejs` in
 * irons_spellbooks
 * apotheosis
 * curios
+* kubejs
