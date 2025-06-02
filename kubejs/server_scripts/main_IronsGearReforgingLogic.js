@@ -259,44 +259,6 @@ const main_IronsGearReforgingLogic = (function() {
         }
         console.log(`${e.player}closed ReforgingMenu`);
     })
-    ServerFunc.randomizeAffixName = function(name) {
-        let affix_split = name.split("/")
-        // console.log(affix_split);
-        // there's a problem, so return without change
-        let name_extracted = affix_split[affix_split.length - 1]
-        return name_extracted
-    }
-    ServerFunc.updateConfigAndFakeLocalization = function() {
-        // let config_cache = configObj.cache
-        // let cache_items = config_cache.recorded_irons_items = {}
-        // let cache_affixes = config_cache.magicAffixMap = {}
-        // let fake_localization = global.fake_localization
-        // for (const key of recorded_irons_items.keySet()) {
-        //     cache_items[key] = recorded_irons_items.get(key)
-        // }
-        // let flag = true
-        // for (const key of magicAffixMap.keySet()) {
-        //     let this_school_affixes = cache_affixes[key] = []
-        //     for (const affix of magicAffixMap.get(key).affixes)
-        //     {
-        //         let affix_locstr = AffixRegistry.INSTANCE.getKey(affix).toString()
-        //         this_school_affixes.push(affix_locstr)
-        //         let prefix_key = `affix.${affix_locstr}`
-        //         let suffix_key = `affix.${affix_locstr}.suffix`
-        //         let preffix_value = fake_localization[prefix_key]
-        //         if (!preffix_value) {
-        //             fake_localization[prefix_key] = ServerFunc.randomizeAffixName(affix_locstr)
-        //         }
-        //         let suffix_value = fake_localization[suffix_key]
-        //         if (!suffix_value) {
-        //             fake_localization[suffix_key] = "of " + ServerFunc.randomizeAffixName(affix_locstr)
-        //         }
-        //     }
-        // }
-        // console.log(config_cache);
-        // JsonIO.write(global.localizationPath, global.fake_localization)
-        // JsonIO.write(global.configFilePath, configObj)
-    }
     ServerFunc.updateConfig = function() {
         let config_cache = configObj.cache
         let cache_items = config_cache.recorded_irons_items = {}
@@ -319,9 +281,6 @@ const main_IronsGearReforgingLogic = (function() {
     ServerEvents.unloaded(e => {
         if (configObj["refresh_on_server_unloaded"]) {
             ServerFunc.updateConfig()
-        }
-        if (configObj["update_localization"]) {
-            // ServerFunc.updateConfigAndFakeLocalization()
         }
         console.log('unloaded server')
     })
